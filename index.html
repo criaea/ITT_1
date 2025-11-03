@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -962,6 +964,7 @@
                 <p class="cover-subtitle-list">communications, career, relationships, sporting, success, business success</p>
 
                 <div class="cover-image">
+                    <!-- Image path updated -->
                     <img src="copertina_libro.png" alt="Artistic representation of human perception">
                 </div>
                 <p class="cover-image-caption">Each of us perceives the world differently</p>
@@ -987,6 +990,7 @@ best to meet the demands of their personal and professional environments.</p>
         <h2 class="page-subtitle">Unlock Your Perception</h2>
         
         <div class="intro-image-container" id="introImageSection">
+            <!-- Image path updated -->
             <img src="glasses.png" alt="Varying colored glasses representing different perceptions">
         </div>
 
@@ -1002,9 +1006,13 @@ best to meet the demands of their personal and professional environments.</p>
         </div>
         
         <div id="questionnaire">
-            </div>
+            <!-- Questions will be dynamically inserted here -->
+        </div>
         
         <div class="navigation" id="mainNavigation">
+            <div class="dev-navigation">
+                <button id="devSkipBtn">Dev Skip</button>
+            </div>
             <div class="main-navigation">
                 <button id="prevBtn" disabled>Previous</button>
                 <button id="nextBtn" style="display: none;">Next</button>
@@ -1012,10 +1020,13 @@ best to meet the demands of their personal and professional environments.</p>
             </div>
         </div>
         
-        <div class="path-selection" id="pathSelectionPage" style="display: none;"></div>
+        <!-- Path Selection Page (REMOVED) -->
+         <div class="path-selection" id="pathSelectionPage" style="display: none;"></div>
 
+        <!-- Personality Profile Chart Section (REMOVED) -->
         <div class="profile-chart" id="profileChartSection" style="display: none;"></div>
         
+        <!-- New Vertical Line Chart Section (Page 74) -->
         <div class="results" id="verticalChartSection">
             <h2 class="results-title" id="scoreProfileTitle"><span>Your Score Profile</span></h2>
              <div class="chart-wrapper">
@@ -1026,22 +1037,26 @@ best to meet the demands of their personal and professional environments.</p>
             <div id="yourResultSection" class="your-result-section">
                 <h2 class="results-title" id="yourResultTitle"><span>Your Result</span></h2>
                 <div id="resultDisplay" class="result-display">
-                    </div>
+                    <!-- Result cards will be inserted here -->
+                </div>
             </div>
             <div id="predictionSection" class="prediction-section" style="display: none;">
                 <h2 class="results-title" id="predictionTitle"><span>Your Prediction</span></h2>
                 <div id="predictionDisplay" class="prediction-display">
-                    </div>
+                    <!-- Prediction cards will be inserted here -->
+                </div>
             </div>
             <div id="extraInfoSection" class="extra-info-section">
                  <h2 class="results-title" id="analysisTitle"><span>Detailed Analysis</span></h2>
-                </div>
+                <!-- This will be populated by JS -->
+            </div>
              <div class="navigation" style="justify-content: center; margin-top: 20px;">
                 <button id="downloadResultsBtn">Download Results</button>
             </div>
         </div>
     </div>
 
+    <!-- Detail page, outside main container -->
     <div class="detail-page" id="detailPage">
         <div id="detailContent" class="detail-content"></div>
         <button id="returnToResultsBtn">Return to the results</button>
@@ -1267,7 +1282,7 @@ best to meet the demands of their personal and professional environments.</p>
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
         const proceedToPathBtn = document.getElementById('proceedToPathBtn');
-        // const devSkipBtn = document.getElementById('devSkipBtn'); // Removed
+        const devSkipBtn = document.getElementById('devSkipBtn');
         const verticalChartSection = document.getElementById('verticalChartSection');
         const progressSection = document.getElementById('progressSection');
         const instructionSection = document.getElementById('instructionSection');
@@ -1367,7 +1382,8 @@ best to meet the demands of their personal and professional environments.</p>
         }
 
         function displayAnimalQuestion() {
-            // questionnaireEl.innerHTML = `
+            // <!-- Image paths updated -->
+            questionnaireEl.innerHTML = `
                 <div class="break-question-container">
                     <div class="question-text">Choose one</div>
                     <div class="image-options-container">
@@ -1462,7 +1478,6 @@ best to meet the demands of their personal and professional environments.</p>
             }
         }
 
-        /* Removed devSkipToProfiles function
         function devSkipToProfiles() {
             for (let i = 0; i < questions.length; i++) {
                 userAnswers[i] = Math.floor(Math.random() * 2); 
@@ -1470,7 +1485,6 @@ best to meet the demands of their personal and professional environments.</p>
             currentStep = totalSteps - 1; 
             showVerticalChart();
         }
-        */
 
         function calculateScores() {
             if (scoresCalculated) return;
@@ -1879,7 +1893,8 @@ best to meet the demands of their personal and professional environments.</p>
                 topicResponses.appendChild(responseItemsContainer);
 
                 const analysisImage = document.createElement('img');
-                analysisImage.src = 'glasses.png'; // analysisImage.alt = 'Analysis Illustration';
+                analysisImage.src = 'glasses.png'; // <!-- Image path updated -->
+                analysisImage.alt = 'Analysis Illustration';
                 analysisImage.className = 'analysis-image';
                 topicResponses.appendChild(analysisImage);
 
@@ -1930,7 +1945,7 @@ best to meet the demands of their personal and professional environments.</p>
         });
         
         proceedToPathBtn.addEventListener('click', showVerticalChart);
-        // devSkipBtn.addEventListener('click', devSkipToProfiles); // Removed
+        devSkipBtn.addEventListener('click', devSkipToProfiles);
         
         returnToResultsBtn.addEventListener('click', () => {
             detailPage.style.display = 'none';
@@ -2048,3 +2063,25 @@ best to meet the demands of their personal and professional environments.</p>
     </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
