@@ -426,6 +426,10 @@
             color: #7f8c8d;
             text-shadow: none;
         }
+
+        #devSkipBtn {
+            background: #f39c12;
+        }
         
         .progress {
             margin-bottom: 30px;
@@ -643,14 +647,25 @@
             flex-shrink: 0;
             display: block; /* Show image */
         }
+        
+        /* --- MODIFICATION START: Added styles for response-item hover --- */
         .response-item {
             font-size: 1rem;
             color: #6c757d;
             transition: all 0.3s;
             margin-bottom: 8px;
             text-align: left;
-            /* Removed white-space: nowrap; */
+            cursor: pointer; /* Added */
+            border-radius: 4px; /* Added */
+            padding: 4px 8px; /* Added */
+            margin: 0 -8px 8px -8px; /* Added to offset padding */
         }
+        .response-item:hover {
+            background-color: #e9ecef; /* Added */
+            color: #2c3e50; /* Added */
+        }
+        /* --- MODIFICATION END --- */
+
         .response-item.highlighted {
             font-size: 1.25rem;
             font-weight: 700;
@@ -666,6 +681,17 @@
             text-align: left;
             font-style: italic;
         }
+
+        /* --- MODIFICATION START: Added instruction text style --- */
+        .clickable-instruction {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 15px;
+            font-style: italic;
+            padding: 0 20px; /* Add padding for mobile */
+        }
+        /* --- MODIFICATION END --- */
 
         /* Scrollspy Navigation */
         #scrollspyNav {
@@ -740,6 +766,80 @@
             visibility: visible;
             opacity: 1;
         }
+        
+        /* --- MODIFICATION START: Added Card Modal Styles --- */
+        /* --- Card Modal Styles --- */
+        .tournament-card {
+            width: 240px; /* Reduced from 260px */
+            flex-shrink: 0;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px -10px rgba(0,0,0,0.1);
+            border: 1px solid #e9edf2;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            /* max-height: 70vh; */ /* Removed */
+        }
+        
+        .profile-column-header {
+            padding: 10px; /* Reduced from 12px */
+            text-align: center;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            flex-shrink: 0; /* Prevent header from shrinking */
+        }
+        
+        .profile-column-number {
+            font-size: 2rem; /* Reduced from 2.2rem */
+            font-weight: 700;
+            color: #5a29e4;
+            line-height: 1;
+        }
+
+        .profile-column-title {
+            font-size: 0.7rem; /* Reduced from 0.75rem */
+            font-weight: 600;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        
+        .profile-column { /* This is the <ul> */
+            list-style: none;
+            padding: 12px; /* Reduced from 15px */
+            margin: 0;
+            font-size: 0.8rem; /* Reduced from 0.85rem */
+            line-height: 1.6; /* Reduced from 1.7 */
+            flex-grow: 1;
+            text-align: left;
+            /* overflow-y: auto; */ /* Removed */
+        }
+
+        .profile-column li {
+            border-bottom: 1px solid #f0f2f5;
+            padding: 4px 0; /* Reduced from 5px 0 */
+            color: #34495e;
+            position: relative;
+            /* padding-left: 30px; */ /* Removed */
+            font-weight: 500;
+        }
+         .profile-column li:last-child {
+            border-bottom: none;
+         }
+        
+        .profile-column li::before {
+            content: ''; /* Removed checkmark */
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #2575fc;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        /* --- End Card Modal Styles --- */
+        /* --- MODIFICATION END --- */
 
 
         /* Mobile Optimizations */
@@ -831,7 +931,7 @@
             }
 
             /* Hide all non-result elements */
-            #coverPage, #mainNavigation, #scrollspyNav, #returnToResultsBtn, #downloadResultsBtn, .print-hide {
+            #coverPage, #mainNavigation, #devSkipBtn, #scrollspyNav, #returnToResultsBtn, #downloadResultsBtn, .print-hide, #cardModal { /* MOD: Added #cardModal */
                 display: none !important;
             }
 
@@ -879,13 +979,19 @@
             .response-items-container {
                 page-break-inside: avoid;
             }
-
+            
             /* --- MODIFICATION: Hide comparison analysis items --- */
+            .response-item { /* MOD: Reset hover styles for print */
+                cursor: default;
+                background-color: transparent !important;
+                color: #6c757d !important;
+            }
             .analysis-separator, .response-item:not(.highlighted) {
                 display: none !important; 
             }
             .response-item.highlighted {
                 display: block !important; /* Ensure highlighted one is visible */
+                color: #2575fc !important; /* Ensure color prints */
             }
             /* --- END MODIFICATION --- */
 
@@ -1004,6 +1110,9 @@ best to meet the demands of their personal and professional environments.</p>
         </div>
         
         <div class="navigation" id="mainNavigation">
+            <div class="dev-navigation">
+                <button id="devSkipBtn">Dev Skip</button>
+            </div>
             <div class="main-navigation">
                 <button id="prevBtn" disabled>Previous</button>
                 <button id="nextBtn" style="display: none;">Next</button>
@@ -1020,6 +1129,9 @@ best to meet the demands of their personal and professional environments.</p>
         <!-- New Vertical Line Chart Section (Page 74) -->
         <div class="results" id="verticalChartSection">
             <h2 class="results-title" id="scoreProfileTitle"><span>Your Score Profile</span></h2>
+            <!-- MODIFICATION START: Added instruction text -->
+            <p class="clickable-instruction">Tap on a personality type (e.g., "1. ORDER") in the label area to the left of the chart to see its description card.</p>
+            <!-- MODIFICATION END -->
              <div class="chart-wrapper">
                 <div class="chart-container">
                     <canvas id="verticalLineChart"></canvas>
@@ -1039,6 +1151,9 @@ best to meet the demands of their personal and professional environments.</p>
             </div>
             <div id="extraInfoSection" class="extra-info-section">
                  <h2 class="results-title" id="analysisTitle"><span>Detailed Analysis</span></h2>
+                 <!-- MODIFICATION START: Added instruction text -->
+                 <p class="clickable-instruction">Tap on a description below to see its full personality card.</p>
+                 <!-- MODIFICATION END -->
                 <!-- This will be populated by JS -->
             </div>
              <div class="navigation" style="justify-content: center; margin-top: 20px;">
@@ -1052,6 +1167,16 @@ best to meet the demands of their personal and professional environments.</p>
         <div id="detailContent" class="detail-content"></div>
         <button id="returnToResultsBtn">Return to the results</button>
     </div>
+
+    <!-- MODIFICATION START: Added Card Modal -->
+    <!-- Changed to flex-column, added overflow-y: auto, and changed button -->
+    <div id="cardModal" style="display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; overflow-y: auto; background-color: rgba(0,0,0,0.6); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); flex-direction: column; align-items: center; justify-content: center; padding: 20px;">
+        <div id="cardModalContent">
+            <!-- Card content will be injected here -->
+        </div>
+        <button id="closeCardModal" style="margin-top: 20px;">Return to the results</button>
+    </div>
+    <!-- MODIFICATION END -->
 
     <div id="scrollspyNav"></div>
 
@@ -1263,6 +1388,36 @@ best to meet the demands of their personal and professional environments.</p>
             ]
         };
 
+        // --- MODIFICATION START: Added Card Generation Function ---
+        function createProfileCardHTML(index) {
+            const cat = categories[index];
+            const typeNumber = index + 1;
+            const typeName = ['ONE', 'TWO', 'THREE', 'FOUR', 'FIVE', 'SIX', 'SEVEN', 'EIGHT', 'NINE'][index];
+            // Using profileData which is already defined in this file
+            return `
+                <div class="tournament-card">
+                    <div class="profile-column-header">
+                        <div class="profile-column-number">${typeNumber}</div>
+                        <div class="profile-column-title">TYPE ${typeName}</div>
+                    </div>
+                    <ul class="profile-column">
+                        ${profileData[cat].map(word => `<li>${word}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+        }
+
+        function showCardModal(index) {
+            cardModalContent.innerHTML = createProfileCardHTML(index);
+            cardModal.style.display = 'flex';
+        }
+
+        function hideCardModal() {
+            cardModal.style.display = 'none';
+            cardModalContent.innerHTML = '';
+        }
+        // --- MODIFICATION END ---
+
 
         // DOM elements
         const coverPage = document.getElementById('coverPage');
@@ -1273,6 +1428,7 @@ best to meet the demands of their personal and professional environments.</p>
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
         const proceedToPathBtn = document.getElementById('proceedToPathBtn');
+        const devSkipBtn = document.getElementById('devSkipBtn');
         const verticalChartSection = document.getElementById('verticalChartSection');
         const progressSection = document.getElementById('progressSection');
         const instructionSection = document.getElementById('instructionSection');
@@ -1287,6 +1443,11 @@ best to meet the demands of their personal and professional environments.</p>
         const pathSelectionPage = document.getElementById('pathSelectionPage');
         const mainNavigation = document.getElementById('mainNavigation');
         const downloadResultsBtn = document.getElementById('downloadResultsBtn');
+        // --- MODIFICATION START: Added Modal DOM Elements ---
+        const cardModal = document.getElementById('cardModal');
+        const cardModalContent = document.getElementById('cardModalContent');
+        const closeCardModal = document.getElementById('closeCardModal');
+        // --- MODIFICATION END ---
         
 
         // Initialize the questionnaire
@@ -1468,6 +1629,14 @@ best to meet the demands of their personal and professional environments.</p>
             }
         }
 
+        function devSkipToProfiles() {
+            for (let i = 0; i < questions.length; i++) {
+                userAnswers[i] = Math.floor(Math.random() * 2); 
+            }
+            currentStep = totalSteps - 1; 
+            showVerticalChart();
+        }
+
         function calculateScores() {
             if (scoresCalculated) return;
             categories.forEach(cat => scores[cat] = 0);
@@ -1501,6 +1670,19 @@ best to meet the demands of their personal and professional environments.</p>
             // Show result elements
             mainTitle.textContent = "Evaluation Results";
             verticalChartSection.style.display = 'block';
+
+            // --- MODIFICATION START: Define canvas and ctx at the top ---
+            const canvas = document.getElementById('verticalLineChart');
+            if (!canvas) {
+                console.error("Failed to find canvas element with ID 'verticalLineChart'");
+                return; 
+            }
+            const ctx = canvas.getContext('2d');
+            if (!ctx) {
+                console.error("Failed to get 2D context from canvas");
+                return;
+            }
+            // --- MODIFICATION END ---
 
             const resultDisplayEl = document.getElementById('resultDisplay');
             resultDisplayEl.innerHTML = '';
@@ -1595,9 +1777,6 @@ best to meet the demands of their personal and professional environments.</p>
             const bestResultCard = createCard(highestScoringType, 'best');
             const worstResultCard = createCard(sortedScores[8].index, 'worst');
             resultDisplayEl.innerHTML = bestResultCard + worstResultCard;
-
-            const canvas = document.getElementById('verticalLineChart');
-            const ctx = canvas.getContext('2d');
             
             // Create gradients
             const lineGradient = ctx.createLinearGradient(0, 0, 0, 500);
@@ -1741,8 +1920,11 @@ best to meet the demands of their personal and professional environments.</p>
                 window.verticalChart.destroy();
             }
             
+            // --- FIX START ---
+            // Define isMobile here so it's in scope for the chart options
             const isMobile = window.innerWidth < 768;
-            
+            // --- FIX END ---
+
             window.verticalChart = new Chart(ctx, {
                 type: 'line',
                 data: {
@@ -1775,7 +1957,7 @@ best to meet the demands of their personal and professional environments.</p>
                     maintainAspectRatio: false,
                     layout: {
                         padding: {
-                            left: isMobile ? 130 : 190, 
+                            left: isMobile ? 130 : 190, // Now 'isMobile' is defined
                             right: 50
                         }
                     },
@@ -1814,22 +1996,67 @@ best to meet the demands of their personal and professional environments.</p>
                         }
                     },
                     plugins: { legend: { display: false }, tooltip: { enabled: false } },
-                    onClick: (event, elements) => {
-                        if (elements.length > 0) {
-                            const elementIndex = elements[0].index;
-                            const category = categories[elementIndex];
-                            
-                            if (clickableTypes.includes(category)) {
-                                detailContent.textContent = pointBlurbs[category];
-                                detailPage.style.display = 'flex';
+                    // --- MODIFICATION START: Removed onClick from options ---
+                    // onClick: ... (REMOVED)
+                    // --- MODIFICATION END ---
+                }
+            });
+
+            // --- MODIFICATION START: Re-ordered external click listener to prioritize labels ---
+            canvas.addEventListener('click', (event) => {
+                const chart = window.verticalChart;
+                if (!chart) return;
+
+                const { chartArea, scales: { y } } = chart;
+                
+                // Get coordinates relative to the canvas
+                const rect = canvas.getBoundingClientRect();
+                const x = event.clientX - rect.left;
+                const yCoord = event.clientY - rect.top;
+
+                // Check for Y-axis label click FIRST
+                if (x < chartArea.left && x > 0) { // Check if click is in the label area
+                    if (y.ticks && y.ticks.length > 1) {
+                        // Get approximate height of one label item.
+                        const tickHeight = (y.getPixelForTick(1) - y.getPixelForTick(0));
+                        
+                        for (let i = 0; i < y.ticks.length; i++) {
+                            const yPos = y.getPixelForTick(i);
+                            // Define a clickable area around the tick's center
+                            const yMin = yPos - (tickHeight / 2);
+                            const yMax = yPos + (tickHeight / 2);
+
+                            if (yCoord >= yMin && yCoord <= yMax) {
+                                showCardModal(i);
+                                return; // Found a label, stop processing
                             }
                         }
                     }
                 }
-            });
 
+                // If no data point, check for data point clicks
+                const clickedElements = chart.getElementsAtEventForMode(event, 'point', { intersect: true }, true);
+
+                if (clickedElements.length > 0) {
+                    const elementIndex = clickedElements[0].index;
+                    const category = categories[elementIndex];
+                    
+                    if (clickableTypes.includes(category)) {
+                        detailContent.textContent = pointBlurbs[category];
+                        detailPage.style.display = 'flex';
+                    }
+                    return; // Stop checking
+                }
+            });
+            // --- MODIFICATION END ---
+
+
+            // --- MODIFICATION START: Add click listeners to response items ---
             // Populate extra info section
             extraInfoSectionEl.innerHTML = ' <h2 class="results-title" id="analysisTitle"><span>Detailed Analysis</span></h2>';
+            // Added instruction text
+            extraInfoSectionEl.insertAdjacentHTML('beforeend', '<p class="clickable-instruction">Tap on a description below to see its full personality card.</p>');
+            
             for(const topic in extraData) {
                 const topicContainer = document.createElement('div');
                 topicContainer.className = 'topic-container';
@@ -1854,6 +2081,10 @@ best to meet the demands of their personal and professional environments.</p>
                 const highlightedEl = document.createElement('div');
                 highlightedEl.className = 'response-item highlighted';
                 highlightedEl.textContent = `${highestScoringType + 1}. ${highlightedResponseText.charAt(0).toUpperCase() + highlightedResponseText.slice(1).toLowerCase()}`;
+                
+                // --- Add click listener ---
+                highlightedEl.addEventListener('click', () => showCardModal(highestScoringType));
+                
                 responseItemsContainer.appendChild(highlightedEl);
 
                 const separator = document.createElement('p');
@@ -1869,6 +2100,10 @@ best to meet the demands of their personal and professional environments.</p>
                     const responseEl = document.createElement('div');
                     responseEl.className = 'response-item';
                     responseEl.textContent = `${index + 1}. ${responseText.charAt(0).toUpperCase() + responseText.slice(1).toLowerCase()}`;
+                    
+                    // --- Add click listener ---
+                    responseEl.addEventListener('click', () => showCardModal(index));
+                    
                     responseItemsContainer.appendChild(responseEl);
                 });
 
@@ -1899,6 +2134,8 @@ best to meet the demands of their personal and professional environments.</p>
                 topicContainer.appendChild(topicResponses);
                 extraInfoSectionEl.appendChild(topicContainer);
             }
+            // --- MODIFICATION END ---
+
 
             // Build and show scrollspy
             buildScrollspy();
@@ -1926,7 +2163,8 @@ best to meet the demands of their personal and professional environments.</p>
             }
         });
         
-        proceedToPathBtn.addEventListener('click', showVerticalChart);
+        proceedToPathBtn.addEventListener('click', showVerticalChart); // Changed to go direct to results
+        devSkipBtn.addEventListener('click', devSkipToProfiles);
         
         returnToResultsBtn.addEventListener('click', () => {
             detailPage.style.display = 'none';
@@ -1939,6 +2177,16 @@ best to meet the demands of their personal and professional environments.</p>
             changeBackground();
             setInterval(changeBackground, 30000);
         });
+
+        // --- MODIFICATION START: Added Modal Listeners ---
+        closeCardModal.addEventListener('click', hideCardModal);
+        cardModal.addEventListener('click', (event) => {
+            // Close if clicked on the background
+            if (event.target === cardModal) {
+                hideCardModal();
+            }
+        });
+        // --- MODIFICATION END ---
 
         function buildScrollspy() {
             scrollspyNavEl.innerHTML = '';
