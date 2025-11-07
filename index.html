@@ -97,6 +97,18 @@
             margin-bottom: 1.5rem;
         }
 
+        /* New style for the website tag */
+        .cover-website-tag {
+            font-size: 0.8rem; /* Same size as .cover-copyright */
+            font-style: italic; /* Same style as .cover-copyright */
+            color: #555; /* Same color as .cover-copyright */
+            /* font-weight: 600; */ /* Removed bold to match base copyright style per request */
+            text-align: right; /* Align text to the right */
+            width: 100%; /* Ensure it spans the container */
+            margin-top: 1.5rem; /* Add space above */
+            padding-right: 10px; /* Add padding from the edge */
+        }
+
         .cover-subtitle-main {
             font-family: 'Poppins', sans-serif;
             font-size: 1.2rem;
@@ -595,7 +607,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: background-color 0.3s;
+            transition: background-color: 0.3s;
         }
         .topic-icon {
             width: 24px;
@@ -1076,6 +1088,7 @@ The <span class="itt-logo-text">ITT 1</span> questionnaire enables people to DIS
 personal perception, its strengths and weaknesses. <span class="itt-logo-text">ITT 1</span> helps to develop strategies on how
 best to meet the demands of their personal and professional environments.</p>
                 <button id="startBtn">Begin the Evaluation</button>
+                <p class="cover-website-tag">ourfields.ie &copy;</p>
             </div>
         </div>
     </div>
@@ -1111,7 +1124,7 @@ best to meet the demands of their personal and professional environments.</p>
         
         <div class="navigation" id="mainNavigation">
             <div class="dev-navigation">
-                <button id="devSkipBtn">Dev Skip</button>
+                <!-- <button id="devSkipBtn">Dev Skip</button> --> <!-- Removed Dev Skip Button -->
             </div>
             <div class="main-navigation">
                 <button id="prevBtn" disabled>Previous</button>
@@ -1426,7 +1439,7 @@ best to meet the demands of their personal and professional environments.</p>
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
         const proceedToPathBtn = document.getElementById('proceedToPathBtn');
-        const devSkipBtn = document.getElementById('devSkipBtn');
+        // const devSkipBtn = document.getElementById('devSkipBtn'); // Removed Dev Skip Button
         const verticalChartSection = document.getElementById('verticalChartSection');
         const progressSection = document.getElementById('progressSection');
         const instructionSection = document.getElementById('instructionSection');
@@ -1447,6 +1460,25 @@ best to meet the demands of their personal and professional environments.</p>
         const closeCardModal = document.getElementById('closeCardModal');
         // --- MODIFICATION END ---
         
+        // --- FIX START: Moved updateNavigationButtons function ---
+        function updateNavigationButtons() {
+            prevBtn.disabled = currentStep === 0;
+            
+            const isLastRealQuestion = (currentStep === 73);
+            const lastRealQuestionAnswered = userAnswers[71] !== null;
+
+            if (isLastRealQuestion && lastRealQuestionAnswered) {
+                proceedToPathBtn.style.display = 'inline-block';
+                nextBtn.style.display = 'none';
+            } else if (manualNavMode) {
+                nextBtn.style.display = 'inline-block';
+                proceedToPathBtn.style.display = 'none';
+            } else {
+                nextBtn.style.display = 'none';
+                proceedToPathBtn.style.display = 'none';
+            }
+        }
+        // --- FIX END ---
 
         // Initialize the questionnaire
         function showStep() {
@@ -1459,7 +1491,7 @@ best to meet the demands of their personal and professional environments.</p>
             scrollspyNavEl.style.display = 'none';
             mainNavigation.style.display = 'flex';
             
-            updateNavigationButtons();
+            updateNavigationButtons(); // This call is now valid
             
             const answeredCount = userAnswers.filter(a => a !== null).length;
             const percentComplete = Math.floor((answeredCount / questions.length) * 100);
@@ -1609,24 +1641,7 @@ best to meet the demands of their personal and professional environments.</p>
             }
         }
 
-        function updateNavigationButtons() {
-            prevBtn.disabled = currentStep === 0;
-            
-            const isLastRealQuestion = (currentStep === 73);
-            const lastRealQuestionAnswered = userAnswers[71] !== null;
-
-            if (isLastRealQuestion && lastRealQuestionAnswered) {
-                proceedToPathBtn.style.display = 'inline-block';
-                nextBtn.style.display = 'none';
-            } else if (manualNavMode) {
-                nextBtn.style.display = 'inline-block';
-                proceedToPathBtn.style.display = 'none';
-            } else {
-                nextBtn.style.display = 'none';
-                proceedToPathBtn.style.display = 'none';
-            }
-        }
-
+        /* Removed devSkipToProfiles function as it's no longer used
         function devSkipToProfiles() {
             for (let i = 0; i < questions.length; i++) {
                 userAnswers[i] = Math.floor(Math.random() * 2); 
@@ -1634,6 +1649,7 @@ best to meet the demands of their personal and professional environments.</p>
             currentStep = totalSteps - 1; 
             showVerticalChart();
         }
+        */
 
         function calculateScores() {
             if (scoresCalculated) return;
@@ -2159,7 +2175,7 @@ best to meet the demands of their personal and professional environments.</p>
         });
         
         proceedToPathBtn.addEventListener('click', showVerticalChart); // Changed to go direct to results
-        devSkipBtn.addEventListener('click', devSkipToProfiles);
+        // devSkipBtn.addEventListener('click', devSkipToProfiles); // Removed Dev Skip Button listener
         
         returnToResultsBtn.addEventListener('click', () => {
             detailPage.style.display = 'none';
