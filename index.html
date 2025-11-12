@@ -607,7 +607,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: background-color: 0.3s;
+            transition: background-color 0.3s;
         }
         .topic-icon {
             width: 24px;
@@ -853,6 +853,20 @@
         /* --- End Card Modal Styles --- */
         /* --- MODIFICATION END --- */
 
+        /* --- MODIFICATION START: Added footer style --- */
+        .page-footer {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #555;
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #e0e6ed;
+            font-style: italic;
+        }
+        .page-footer b {
+            font-weight: 600;
+        }
+        /* --- MODIFICATION END --- */
 
         /* Mobile Optimizations */
         @media (max-width: 768px) {
@@ -1069,7 +1083,7 @@
         <div class="container" id="coverContainer">
             <div class="cover-content">
                 
-                <h1 class="cover-title">The <span class="itt-logo">ITT 1</span> (Innate Traits Test)</h1>
+                <h1 class="cover-title">The <span class="itt-logo">9CS</span> (Nine Communication Styles)</h1>
                 <p class="cover-copyright">exclusive to <b>ourfields.ie</b> programmes</p>
                 
                 <p class="cover-subtitle-main">DISCOVER and UNDERSTAND yourself to develop success strategies in:</p>
@@ -1083,9 +1097,9 @@
                 
                 <p class="cover-subtitle">Behavioural research suggests that the most effective people are those who understand themselves and how they perceive the world differently than others. We, <b>ourfields.ie</b>, build on ancient wisdom from as far back as
 Pythagoras with the assistance of modern psychology including Carl Jung and developing neurology
-to develop the <span class="itt-logo-text">ITT 1</span> programme (Innate Traits Test).<br><br>
-The <span class="itt-logo-text">ITT 1</span> questionnaire enables people to DISCOVER and UNDERSTAND their unique
-personal perception, its strengths and weaknesses. <span class="itt-logo-text">ITT 1</span> helps to develop strategies on how
+to develop the <span class="itt-logo-text">9CS</span> programme (Nine Communication Styles).<br><br>
+The <span class="itt-logo-text">9CS</span> questionnaire enables people to DISCOVER and UNDERSTAND their unique
+personal perception, its strengths and weaknesses. <span class="itt-logo-text">9CS</span> helps to develop strategies on how
 best to meet the demands of their personal and professional environments.</p>
                 <button id="startBtn">Begin the Evaluation</button>
                 <p class="cover-website-tag">ourfields.ie &copy;</p>
@@ -1133,6 +1147,11 @@ best to meet the demands of their personal and professional environments.</p>
             </div>
         </div>
         
+        <!-- MODIFICATION: Added footer to main container -->
+        <div class="page-footer">
+            <b>ourfields.ie</b> 9CS (Nine Communication Styles)
+        </div>
+
         <!-- Path Selection Page (REMOVED) -->
          <div class="path-selection" id="pathSelectionPage" style="display: none;"></div>
 
@@ -1167,6 +1186,12 @@ best to meet the demands of their personal and professional environments.</p>
                  <!-- Instruction text for analysis removed per user request -->
                 <!-- This will be populated by JS -->
             </div>
+            
+            <!-- MODIFICATION: Added footer to results section -->
+            <div class="page-footer">
+                <b>ourfields.ie</b> 9CS (Nine Communication Styles)
+            </div>
+            
              <div class="navigation" style="justify-content: center; margin-top: 20px;">
                 <button id="downloadResultsBtn">Download Results</button>
             </div>
@@ -1244,7 +1269,7 @@ best to meet the demands of their personal and professional environments.</p>
             { text: "I like", options: [{ text: "people to enjoy themselves and be happy", value: "G" },{ text: "to feel close to my friends", value: "B" }] },
             { text: "It is easy for me to", options: [{ text: "confront people to change their minds", value: "H" },{ text: "compete with people in order to succeed", value: "C" }] },
             { text: "I believe that", options: [{ text: "the experience of symbols and art is something special", value: "D" },{ text: "most problems in life are not worth losing sleep over", value: "I" }] },
-            { text: "It is important for me to", options: [{ text: "be of service to others", value: "B" },{ text: "understand the ideas of other people", value: "E" }] },
+            { text: "It is important for me to be", options: [{ text: "of service to others", value: "B" },{ text: "understand the ideas of other people", value: "E" }] },
             { text: "It is easy for me to", options: [{ text: "feel deeply and go over things in my imagination", value: "D" },{ text: "become eager and cheerful about the future", value: "G" }] },
             { text: "I like to", options: [{ text: "concentrate and become wrapped up in what interests me", value: "E" },{ text: "show that I care for my friends", value: "B" }] },
             { text: "I am comfortable", options: [{ text: "facing people I disagree with", value: "H" },{ text: "getting prestige and status", value: "C" }] },
@@ -1322,7 +1347,7 @@ best to meet the demands of their personal and professional environments.</p>
             ],
             "my ingrained thinking": [
                 "GUIDEDED BY HIGH NORMS AND ETHICAL PRINCIPALS",
-                "THINK OF OTHER’S NEEDS AND REASON FROM THE HEART",
+                "THINK OF OTHER'S NEEDS AND REASON FROM THE HEART",
                 "PROMOTE IDEAS TO INSPIRE ACTION AND SUCCESS",
                 "MOOD DOES COLOUR PERCEPTION APPROACH",
                 "INCLUDE ALL THE FACTS AND FORM EVIDENCE BASED SOLUTIONS",
@@ -1754,7 +1779,7 @@ best to meet the demands of their personal and professional environments.</p>
             
             const topicIcons = {
                 "my personal focus": `<svg viewBox="0 0 24 24"><path d="M12,4C7.45,4 3.42,7.44 2,12C3.42,16.56 7.45,20 12,20C16.55,20 20.58,16.56 22,12C20.58,7.44 16.55,4 12,4M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9Z" /></svg>`,
-                "my ideal profession approach": `<svg viewBox="0 0 24 24"><path d="M20,6C20,4.89 19.11,4 18,4H6C4.89,4 4,4.89 4,6V20C4,21.11 4.89,22 6,22H18C19.11,22 20,21.11 20,20V6M14,18H6V16H14V18M18,14H6V12H18V14M18,10H6V8H18V10Z" /></svg>`,
+                "my ideal profession approach": `<svg viewBox="0 0 24 24"><path d="M20,6C20,4.89 19.11,4 18,4H6C4.89,4 4,4.89 4,6V20C4,21.11 4.89,22 6,22H18C19.11,22 20,21.11 20,22V6M14,18H6V16H14V18M18,14H6V12H18V14M18,10H6V8H18V10Z" /></svg>`,
                 "my ingrained thinking": `<svg viewBox="0 0 24 24"><path d="M12,2A7,7 0 0,0 5,9C5,11.38 6.19,13.47 8,14.74V17A1,1 0 0,0 9,18H15A1,1 0 0,0 16,17V14.74C17.81,13.47 19,11.38 19,9A7,7 0 0,0 12,2M9,21A1,1 0 0,0 10,22H14A1,1 0 0,0 15,21V20H9V21Z" /></svg>`,
                 "i irritate others with": `<svg viewBox="0 0 24 24"><path d="M12,2C6.47,2 2,6.47 2,12C2,17.53 6.47,22 12,22C17.53,22 22,17.53 22,12C22,6.47 17.53,2 12,2M12,20C7.58,20 4,16.42 4,12C4,7.58 7.58,4 12,4C16.42,4 20,7.58 20,12C20,16.42 16.42,20 12,20M15.5,8C16.33,8 17,8.67 17,9.5C17,10.33 16.33,11 15.5,11C14.67,11 14,10.33 14,9.5C14,8.67 14.67,8 15.5,8M8.5,8C9.33,8 10,8.67 10,9.5C10,10.33 9.33,11 8.5,11C7.67,11 7,10.33 7,9.5C7,8.67 7.67,8 8.5,8M12,14C10.67,14 9.5,14.89 9,16H15C14.5,14.89 13.33,14 12,14Z" /></svg>`,
                 "i am annoyed by others": `<svg viewBox="0 0 24 24"><path d="M12,2C17.52,2 22,6.48 22,12C22,17.52 17.52,22 12,22C6.48,22 2,17.52 2,12C2,6.48 6.48,2 12,2M12,4C7.58,4 4,7.58 4,12C4,16.42 7.58,20 12,20C16.42,20 20,16.42 20,12C20,7.58 16.42,4 12,4M15.5,11C16.33,11 17,10.33 17,9.5C17,8.67 16.33,8 15.5,8C14.67,8 14,8.67 14,9.5C14,10.33 14.67,11 15.5,11M8.5,11C9.33,11 10,10.33 10,9.5C10,8.67 9.33,8 8.5,8C7.67,8 7,8.67 7,9.5C7,10.33 7.67,11 8.5,11M12,13.5C9.82,13.5 7.93,14.81 7,16.5C8.04,17.82 9.87,18.5 12,18.5C14.13,18.5 15.96,17.82 17,16.5C16.07,14.81 14.18,13.5 12,13.5Z" /></svg>`,
